@@ -67,3 +67,13 @@ Task will be evaluated based on
 3. Code scalability : ability to add  `DataProviderZ` by small changes
 4. Unit tests coverage
 5. Docker
+
+## How to add new datasource?
+1. Add datasource name into the "$dataSources" array on the ParentService.php file.
+2. Create a new file with datasource name chose on step1 into the folder "app/Datasources" that extends from the abstract class "AbstractDataProvider".
+3. Choose json file name into this file (that you put into folder: storage/dataproviders) and adjust filters mapping if found.
+
+## Run Tests
+Run the following command:
+
+`./vendor/bin/phpunit`

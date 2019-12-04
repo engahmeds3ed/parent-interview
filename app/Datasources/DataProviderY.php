@@ -1,16 +1,38 @@
 <?php
 namespace App\Datasources;
 
+/**
+ * Class DataProviderY
+ * @package App\Datasources
+ */
 class DataProviderY extends AbstractDataProvider
 {
+    /**
+     * datasource json file
+     * @var string
+     */
     protected $fileName = "DataProviderY.json";
+
+    /**
+     * to store filters based on request
+     * @var array
+     */
     protected $filters = [];
+
+    /**
+     * map status codes
+     * @var array
+     */
     protected $statusCodes = [
         'authorised' => 100,
         'decline' => 200,
         'refunded' => 300
     ];
 
+    /**
+     * Filter by status code name
+     * @param string $status
+     */
     public function filterByStatus(string $status)
     {
         $this->filters[] = [
@@ -20,6 +42,10 @@ class DataProviderY extends AbstractDataProvider
         ];
     }
 
+    /**
+     * Filter by min balance
+     * @param int $from
+     */
     public function filterByBalanceMin(int $from)
     {
         $this->filters[] = [
@@ -29,6 +55,10 @@ class DataProviderY extends AbstractDataProvider
         ];
     }
 
+    /**
+     * Filter by max balance
+     * @param int $to
+     */
     public function filterByBalanceMax(int $to)
     {
         $this->filters[] = [
@@ -38,6 +68,10 @@ class DataProviderY extends AbstractDataProvider
         ];
     }
 
+    /**
+     * Filter by currency code string
+     * @param string $currency
+     */
     public function filterByCurrency(string $currency)
     {
         $this->filters[] = [

@@ -5,6 +5,7 @@ namespace App\Datasources;
 abstract class AbstractDataProvider implements ProviderInterface
 {
     protected $storageFolder = "dataproviders";
+
     abstract public function filterByStatus(string $status);
     abstract public function filterByBalanceMin(int $from);
     abstract public function filterByBalanceMax(int $to);

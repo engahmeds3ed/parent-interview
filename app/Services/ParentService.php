@@ -1,12 +1,24 @@
 <?php
 namespace App\Services;
 
+/**
+ * Class ParentService
+ * @package App\Services
+ */
 class ParentService
 {
+    /**
+     * add all datasources that have the data, please make the name as created inside Datasources folder
+     * @var array
+     */
     protected $dataSources = [
         'DataProviderX',
         'DataProviderY'
     ];
+    /**
+     * Allowed filters to filter the request data
+     * @var array
+     */
     protected $allowedFilters = [
         'provider',
         'statusCode',
@@ -15,18 +27,33 @@ class ParentService
         'currency'
     ];
 
+    /**
+     * main function that returns all parents from different sources
+     * @param array $filters
+     * @return array
+     */
     public function getAllParents(array $filters = [])
     {
         $parents = [];
+        //make sure that no other GET attribute is here
         $filters = $this->validateFilters($filters);
+
+        //get list of valid data sources based on the request
         $dataSources = $this->getValidDataSources($filters);
         foreach ($dataSources as $dataSource){
+            //apply filters on each data source
             $this->processFilters($dataSource, $filters);
+            //combine all datasources data
             $parents = array_merge($parents, $dataSource->getAll());
         }
         return $parents;
     }
 
+    /**
+     * make sure that no filter other than allowed filters here
+     * @param array $filters
+     * @return array
+     */
     protected function validateFilters(array $filters = [])
     {
         $allowedFilters = $this->allowedFilters;
@@ -41,6 +68,11 @@ class ParentService
         return $filtered;
     }
 
+    /**
+     * based on filters get list of data source(s) instances to be used to get parents data
+     * @param array $filters
+     * @return array
+     */
     protected function getValidDataSources(array $filters = []):array
     {
         $dataSources = [];
@@ -56,6 +88,11 @@ class ParentService
         return $dataSources;
     }
 
+    /**
+     * Process filters on specific data source
+     * @param $dataSource
+     * @param array $filters
+     */
     protected function processFilters($dataSource, $filters = [])
     {
         if(!empty($filters)){
