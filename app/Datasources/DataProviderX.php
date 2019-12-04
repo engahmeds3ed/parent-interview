@@ -4,7 +4,6 @@ namespace App\Datasources;
 class DataProviderX extends AbstractDataProvider
 {
     protected $fileName = "DataProviderX.json";
-    protected $data = [];
     protected $filters = [];
     protected $statusCodes = [
         'authorised' => 1,

@@ -4,6 +4,7 @@ namespace App\Datasources;
 
 abstract class AbstractDataProvider implements ProviderInterface
 {
+    protected $storageFolder = "dataproviders";
     abstract public function filterByStatus(string $status);
     abstract public function filterByBalanceMin(int $from);
     abstract public function filterByBalanceMax(int $to);
@@ -11,7 +12,7 @@ abstract class AbstractDataProvider implements ProviderInterface
 
     public function getAll()
     {
-        $filePath = storage_path('dataproviders/').$this->fileName;
+        $filePath = storage_path($this->storageFolder.'/').$this->fileName;
         $json_contents = file_get_contents($filePath);
         $data = json_decode($json_contents);
         $filteredUsers = $data->users;

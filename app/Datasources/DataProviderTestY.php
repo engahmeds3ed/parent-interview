@@ -1,9 +1,10 @@
 <?php
 namespace App\Datasources;
 
-class DataProviderY extends AbstractDataProvider
+class DataProviderTestY extends AbstractDataProvider
 {
-    protected $fileName = "DataProviderY.json";
+    protected $storageFolder = "dataproviders/tests";
+    protected $fileName = "DataProviderTestY.json";
     protected $filters = [];
     protected $statusCodes = [
         'authorised' => 100,

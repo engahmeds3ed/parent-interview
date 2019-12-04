@@ -1,20 +1,21 @@
 <?php
 namespace App\Datasources;
 
-class DataProviderY extends AbstractDataProvider
+class DataProviderTestX extends AbstractDataProvider
 {
-    protected $fileName = "DataProviderY.json";
+    protected $storageFolder = "dataproviders/tests";
+    protected $fileName = "DataProviderTestX.json";
     protected $filters = [];
     protected $statusCodes = [
-        'authorised' => 100,
-        'decline' => 200,
-        'refunded' => 300
+        'authorised' => 1,
+        'decline' => 2,
+        'refunded' => 3
     ];
 
     public function filterByStatus(string $status)
     {
         $this->filters[] = [
-            'name' => 'status',
+            'name' => 'statusCode',
             'value' => $this->statusCodes[$status],
             'operator' => '='
         ];
@@ -23,7 +24,7 @@ class DataProviderY extends AbstractDataProvider
     public function filterByBalanceMin(int $from)
     {
         $this->filters[] = [
-            'name' => 'balance',
+            'name' => 'parentAmount',
             'value' => $from,
             'operator' => '>='
         ];
@@ -32,7 +33,7 @@ class DataProviderY extends AbstractDataProvider
     public function filterByBalanceMax(int $to)
     {
         $this->filters[] = [
-            'name' => 'balance',
+            'name' => 'parentAmount',
             'value' => $to,
             'operator' => '<='
         ];
@@ -41,7 +42,7 @@ class DataProviderY extends AbstractDataProvider
     public function filterByCurrency(string $currency)
     {
         $this->filters[] = [
-            'name' => 'currency',
+            'name' => 'Currency',
             'value' => $currency,
             'operator' => '='
         ];
